@@ -1,4 +1,3 @@
-// encontre uma versao melhor que essa
 
 var express = require('express');
 var router = express.Router();

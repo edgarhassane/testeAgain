@@ -1,0 +1,55 @@
+extends layout
+block content
+	form
+		fieldset.no-border.legend-border
+			-if(Cliente[0].filial.length != 0)
+				legend.selmecAzul.bold Detalhes da Filial #{Cliente[0].filial[Posicao].nome}
+				.row
+					.input-field.col.s12.m6
+						label(for="nome_cliente") Nome do Cliente
+						input.preencher(autocomplete="off", type="text", idioty="#{Cliente[0]._id}", style="font-family:;color:#12375c" ,id="nome_cliente", readonly, value="#{Cliente[0].nome_cliente}",name="nome_cliente")
+					.input-field.col.s12.m6
+						label(for="nome") Filial
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome", name="nome", value="#{Cliente[0].filial[Posicao].nome}")
+				.row
+					.col.s12.m6
+						label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+						select.browser-default(name="regiao", id="regiao", style="font-family:")
+							-if(Cliente[0].filial[Posicao].regiao == "")
+								option(value="" disabled selected) Escolha a opção
+							-else
+								option(value="#{Cliente[0].filial[Posicao].regiao}" selected) #{Cliente[0].filial[Posicao].regiao}
+					.col.s12.m6
+						label <span data-i18n="demo.utilizador_form.provincia"></span>
+						select.browser-default.browser-default(name="provincia", id="provincia", style="font-family:")
+							-if(Cliente[0].filial[Posicao].provincia == "")
+								option(value="" disabled selected) Escolha a opção
+							-else
+								option(value="#{Cliente[0].filial[Posicao].provincia}" selected) #{Cliente[0].filial[Posicao].provincia}
+				.row
+					.input-field.col.s12.m6
+						label(for="rua") Rua/Avenida
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="rua", name="rua", value="#{Cliente[0].filial[Posicao].rua}")
+					.input-field.col.s12.m6
+						label(for="bairro") Bairro
+						input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="bairro", name="bairro", value="#{Cliente[0].filial[Posicao].bairro}")
+				.row
+					.input-field.col.s12.m6
+						label(for="lat") Latitude
+						input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="lat", name="lat", value= "#{Cliente[0].filial[Posicao].lat}")
+					.input-field.col.s12.m6
+						label(for="long") Longitude
+						input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="long", name="long", value= "#{Cliente[0].filial[Posicao].long}")
+
+	block js
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<600){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

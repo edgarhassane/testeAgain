@@ -1,0 +1,188 @@
+extends layout
+block content
+	form#ttnumberform(class="col s12"  method="POST" onsubmit="return validateForm()" name="reportesmanutencaohome")
+		h3(class="fs-title selmecAzul bold" style="margin-top:20px; font-size: 1.5em; margin-bottom:22px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.manutencao_form.reports"></span>
+		.row(style="margin-bottom:0px")
+			.col.s12.m4(style="margin-top:2px")
+				label(style="margin-left:0.2rem;") <span data-i18n="demo.ttnumber_form.reporttype"></span>
+				select.browser-default(name="reportsmaintenance_reporttype", id="reportsmaintenance_reporttype", style="font-family:")
+					option(value="" disabled selected selmecVerde) Escolha uma opção
+					option(value="Diesel Refuel") Diesel Refuel
+					//- option(value="Site Invoicing") Site Invoicing
+					//- option(value="Preventative Maintenance Stats") Preventative Maintenance Stats
+					option(value="Callout Stats") Callout Status
+					option(value="Planned Maintenance") Planned Maintenance
+					option(value="All Jobcards") All Jobcards
+					option(value="Comserv Maintenance Report") VM Maintenance 
+					option(value="Planned Refuel") Planned Refuel
+					//- option(value="Projects Stats") Projects Status
+					//- option(value="Spares Used") Spares Used
+					//- option(value="Back Office Stats") Back Office Stats
+					//- option(value="Call Center Stats") Call Center Stats
+			-if(DataU.nivel_acesso == "admin" || DataU.funcao == "Manager")
+				.col.s12.m4(style="margin-top:2px")
+					label(style="margin-left:0.2rem;") <span data-i18n="demo.manutencao_form.region"></span>
+					select.browser-default(name="reportsmaintenance_region", id="reportsmaintenance_region", style="font-family:")
+						option(value="" selected selmecVerde) Todos
+						option(value="maputo") Maputo
+						option(value="sul") Sul
+						option(value="centro") Centro
+						option(value="norte") Norte
+				.col.s12.m4(style="margin-top:2px")
+					label(style="margin-left:0.2rem;") <span data-i18n="demo.manutencao_form.departamento"></span>
+					select.browser-default(name="reportsmaintenance_department", id="reportsmaintenance_department", style="font-family:")
+						option(value="" selected selmecVerde) Todos
+						option(value="Data Center") Data Center
+						option(value="HVAC") HVAC
+						option(value="Power") Power
+						option(value="Telco") Telco
+			-else
+				.col.s12.m4.hide(style="margin-top:2px")
+					label(style="margin-left:0.2rem;") <span data-i18n="demo.manutencao_form.region"></span>
+					select.browser-default(name="reportsmaintenance_region", id="reportsmaintenance_region", style="font-family:")
+						option(value="" selected selmecVerde) Todos
+						option(value="maputo") Maputo
+						option(value="sul") Sul
+						option(value="centro") Centro
+						option(value="norte") Norte
+				.col.s12.m4.hide(style="margin-top:2px")
+					label(style="margin-left:0.2rem;") <span data-i18n="demo.manutencao_form.departamento"></span>
+					select.browser-default(name="reportsmaintenance_department", id="reportsmaintenance_department", style="font-family:")
+						option(value="" selected selmecVerde) Todos
+						option(value="Data Center") Data Center
+						option(value="HVAC") HVAC
+						option(value="Power") Power
+						option(value="Telco") Telco
+
+		.row(style="margin-bottom:0px")
+			.col.s12.m4#typ(style="margin-top:2px")
+				label(for="ttnumber_status") <span data-i18n="demo.manutencao_form.status"> </span>
+				select.browser-default(name="ttnumber_status", id="ttnumber_status")
+					option(value="" selected) Todos
+					-for(var i=0; i<call.length; i++)
+						option(value="#{call[i]}") #{call[i]}
+
+			.row#mostrartecnico.hide(style="margin-bottom:0px")
+				.col.s12.m4(style="margin-top:2px")
+					label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+					select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+						option(value="" selected) Todos
+						-for(var i=0; i<Usuarios.length; i++)
+							option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+
+			.row#mostrartecnico1.hide(style="margin-bottom:0px")
+				.col.s12.m4(style="margin-top:2px")
+					label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+					select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+						option(value="" selected) Todos
+						-for(var i=0; i<UsuariosS.length; i++)
+							option(value="#{UsuariosS[i]._id}") #{UsuariosS[i].nome}
+
+			.row#mostrartecnico2.hide(style="margin-bottom:0px")
+				.col.s12.m4(style="margin-top:2px")
+					label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+					select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+						option(value="" selected) Todos
+						-for(var i=0; i<UsuariosC.length; i++)
+							option(value="#{UsuariosC[i]._id}") #{UsuariosC[i].nome}
+
+			.row#mostrartecnico3.hide(style="margin-bottom:0px")
+				.col.s12.m4(style="margin-top:2px")
+					label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+					select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+						option(value="" selected) Todos
+						-for(var i=0; i<UsuariosN.length; i++)
+							option(value="#{UsuariosN[i]._id}") #{UsuariosN[i].nome}
+
+
+		.row(style="margin-bottom:0px")
+			.input-field.col.s12.m6(style="margin-top:20px")
+				label(for="reportsmaintenance_fromdate") <span data-i18n="demo.ttnumber_form.fromdate"></span>
+				input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="reportsmaintenance_fromdate" ,name="reportsmaintenance_fromdate")
+			.input-field.col.s12.m6(style="margin-top:20px")
+				label(for="reportsmaintenance_todate") <span data-i18n="demo.ttnumber_form.todate"></span>
+				input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="reportsmaintenance_todate" ,name="reportsmaintenance_todate")
+		button(type="submit", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top:20px; margin-left: 20px !important; font-size:12px" name="action") <span data-i18n="demo.ttnumber_form.procurar"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			function validateForm() {
+				var controlador;
+				var reportsmaintenance_reporttype = document.forms["reportesmanutencaohome"]["reportsmaintenance_reporttype"].value;
+		
+				var jobcard_tecnicoid = document.forms["reportesmanutencaohome"]["jobcard_tecnicoid"].value;
+				var ttnumber_status = document.forms["reportesmanutencaohome"]["ttnumber_status"].value;
+				var reportsmaintenance_department = document.forms["reportesmanutencaohome"]["reportsmaintenance_department"].value;
+				var reportsmaintenance_fromdate = document.forms["reportesmanutencaohome"]["reportsmaintenance_fromdate"].value;
+				var reportsmaintenance_todate = document.forms["reportesmanutencaohome"]["reportsmaintenance_todate"].value;
+				if(reportsmaintenance_reporttype == ""){
+					controlador= 1;
+				}else
+					if((reportsmaintenance_fromdate == "") || (reportsmaintenance_todate == "")){
+						controlador = 2;
+					}else{
+
+						var reportsmaintenance_fromdatecont = new Date(reportsmaintenance_fromdate.split('/').reverse().join('-')).getTime();
+						var reportsmaintenance_todatecont = new Date(reportsmaintenance_todate.split('/').reverse().join('-')).getTime();
+
+						if(reportsmaintenance_todatecont < reportsmaintenance_fromdatecont){
+							controlador = 3;
+						}
+
+				}
+				//- console.log(controlador)
+				if (controlador == 1) {
+					$('#msg_title_modal').html((($(".lang-picker").attr("value")=="pt")?'Messagem do Sistema':'System Message'))
+					$('#msg_content_modal').html((($(".lang-picker").attr("value")=="pt")?'Por favor, seleccione o tipo de reporte que pretende obter.':'Please select the type of report you want to get.'))
+					$('#msg_modal').openModal();
+					return false;
+				}else
+					if(controlador == 2){
+						$('#msg_title_modal').html((($(".lang-picker").attr("value")=="pt")?'Messagem do Sistema':'System Message'))
+						$('#msg_content_modal').html((($(".lang-picker").attr("value")=="pt")?'Por favor, complete o intervalo de tempo.':'Please complete the time interval.'))
+						$('#msg_modal').openModal();
+						return false;
+					}else
+						if(controlador == 3){
+						 
+
+
+							$('#msg_title_modal').html((($(".lang-picker").attr("value")=="pt")?'Messagem do Sistema':'System Message'))
+							$('#msg_content_modal').html((($(".lang-picker").attr("value")=="pt")?'O intervalo escolhido é invalido. Escolha outro.':'The chosen range is invalid. Choose another.'))
+							$('#msg_modal').openModal();
+							return false;
+						}else{
+						     $('#loading').fadeIn().delay(10000).fadeOut();	
+							if(reportsmaintenance_reporttype == "Diesel Refuel"){
+								document.getElementById("ttnumberform").action = "/manutencao/dieselrefuelreports"
+							}else
+								if(reportsmaintenance_reporttype == "Callout Stats"){
+									document.getElementById("ttnumberform").action = "/manutencao/calloutstatsreports";
+								}
+							else if (reportsmaintenance_reporttype == "Planned Maintenance"){
+								document.getElementById("ttnumberform").action = "/manutencao/plannedmaintenancereports"
+							}
+							else if(reportsmaintenance_reporttype == "All Jobcards"){
+								document.getElementById("ttnumberform").action = "/manutencao/alljobcardsreports"
+							}
+							else if(reportsmaintenance_reporttype == "Comserv Maintenance Report"){
+								document.getElementById("ttnumberform").action = "/manutencao/comservplannedmaintenances"
+							}
+							else if(reportsmaintenance_reporttype =="Planned Refuel"){
+								document.getElementById("ttnumberform").action = "/manutencao/plannedrefuelreports"
+							}
+						}
+			}
+			$('#loading').fadeOut();
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

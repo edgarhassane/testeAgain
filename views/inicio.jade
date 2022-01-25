@@ -1,0 +1,12 @@
+extends layout
+block content
+	img(src="/img/banner.jpeg", style="width:100%")
+
+	block js
+		script(type="text/javascript" src="/js/Chart.min.js")
+		script.
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "100%";
+			document.getElementById("main").style.marginLeft= "auto";}
+			}, 1);

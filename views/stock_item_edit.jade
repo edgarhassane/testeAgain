@@ -1,0 +1,149 @@
+extends layout
+block content
+	.seccao.container.white
+		form(id="formulario", method="POST") 
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold <span data-i18n="demo.stock_item_form.titulo"></span>
+				.row
+					.col.s2.file-field.hide-on-med-and-up
+						//- .btn-floating.tooltipped.white.pointer#exportar(style="box-shadow:none !important;" data-position="left", data-delay="10", data-tooltip="Exportar Kilometragem", class="btn-floating btn-large waves-effect waves-light")
+						input(type="file", id="uploadimg",  accept="image/*;capture=camera")
+						i.material-icons.activarVerde.small.right monochrome_photos
+					.col.s10.m6.input-field
+						label(for="mestsre") <span data-i18n="demo.stock_item_form.codigo_de_barras"></span>
+						input.preencher( autocomplete="off", type="text", id="mestsre", min=0 value="#{Stock_item ? Stock_item[0].product_code:''}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="description_item") <span data-i18n="demo.stock_item_form.descricao_item"></span>
+						input.preencher( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="description_item" ,name="description_item", fisher="#{Stock_item[0]._id}", value="#{Stock_item? Stock_item[0].description_item : ''}")
+				.row
+					.col.s12.m6
+							label(for="unit_sale") <span data-i18n="demo.stock_item_form.Unit"></span>
+							select.browser-default(name="unit_sale", id="unit_sale", style="font-family:")
+								option(value="" disabled selected selmecVerde) choose Option
+								option(value="Caixa" selected="#{Stock_item[0].unit_sale}"=='Caixa'? true:false) Caixa
+								option(value="Cada" selected="#{Stock_item[0].unit_sale}"=='Cada'? true:false) Cada
+								option(value="kg" selected="#{Stock_item[0].unit_sale}"=='kg'? true:false) kg
+								option(value="litro" selected="#{Stock_item[0].unit_sale}"=='litro'? true:false) Litro
+								option(value="metro" selected="#{Stock_item[0].unit_sale}"=='metro'? true:false) metro
+								option(value="Rolo" selected="#{Stock_item[0].unit_sale}"=='Rolo'? true:false) Rolo
+					-if(!Stock_item)
+						.col.s12.m6
+							label(for="context") <span data-i18n="demo.stock_item_form.conteudo"></span>
+							textarea.preencher.materialize-textarea( autocomplete="off", data_categoria="#{categoriias}" data_subcaegoria="#{subcategoriias}" style="font-family:;color:#12375c" ,id="context" ,name="context", placeholder="1- 1 x Laptop...\n2- 6 x 8mm Parafusos...", value="#{Stock_item? Stock_item[0].context : ''}") 
+					-else
+						.col.s12.m6
+							label(for="context") <span data-i18n="demo.stock_item_form.conteudo"></span>
+							textarea.preencher.materialize-textarea( style="font-family:;color:#12375c" ,id="context" ,name="context") #{Stock_item[0].context}
+			fieldset.no-border.legend-border
+				legend.selmecAzul.bold 
+				.row
+					.col.s12
+						-if(Stock_item)
+							.col.s4
+								label(for="serialized_item") <span data-i18n="demo.stock_item_form.item_serial"></span>
+							.col.s4
+								input.bom(type="radio" id="serialized_item_ok" name="serialized_item" checked="#{Stock_item[0].serialized_item}"=='sim'? true:false  value="sim")
+								label(for="serialized_item_ok") <span data-i18n="demo.stock_item_form.sim"></span>					
+							.col.s4
+								input.mau(type="radio", id="serialized_item_no", checked="#{Stock_item[0].serialized_item}"=='nao'? true:false name='serialized_item', value="nao")
+								label(for="serialized_item_no") <span data-i18n="demo.stock_item_form.nao"></span>
+						-else
+							.col.s4
+								label(for="serialized_item") <span data-i18n="demo.stock_item_form.item_serial"></span>
+							.col.s4
+								input.bom(type="radio" id="serialized_item_ok" name="serialized_item"   value="sim")
+								label(for="serialized_item_ok") <span data-i18n="demo.stock_item_form.sim"></span>					
+							.col.s4
+								input.mau(type="radio", id="serialized_item_no",  name='serialized_item', value="nao")
+								label(for="serialized_item_no") <span data-i18n="demo.stock_item_form.nao"></span>
+				.row
+					.col.s12
+						-if(Stock_item)
+							.col.s4
+								label(for="cliente_stock") Spare Owner
+							.col.s4
+								input.bom(type="radio" id="comserv_stock_yes"  checked="#{Stock_item[0].cliente_stock}"=='COMSERV'? true:false name="cliente_stock"  value="COMSERV")
+								label(for="comserv_stock_yes") COMSERV					
+							.col.s4
+								input.mau(type="radio", id="comserv_stock_no", checked="#{Stock_item[0].cliente_stock}"=='Cliente'? true:false name='cliente_stock',   value="Cliente")
+								label(for="comserv_stock_no") Cliente
+						-else
+							.col.s4
+								label(for="cliente_stock") Spare Owner
+							.col.s4
+								input.bom(type="radio" id="comserv_stock_yes"   name="cliente_stock"  value="COMSERV")
+								label(for="comserv_stock_yes") COMSERV					
+							.col.s4
+								input.mau(type="radio", id="comserv_stock_no",  name='cliente_stock',   value="Cliente")
+								label(for="comserv_stock_no") Cliente
+				.row
+					.col.s12.m6#clientee(class="#{Stock_item[0].cliente_stock}"!='Cliente'? 'hide':'')
+						label(for="cliente") Cliente
+						select.browser-default.browser-default(name="cliente", id="cliente")
+							-for(var i = 0; i < Cliente.length; i++)
+								option(value="#{Cliente[i].cliente_nome}" selected="#{Stock_item[0].cliente_name}"=="#{Cliente[i].cliente_nome}"? true:false) #{Cliente[i].cliente_nome}
+				.row
+					.col.s12.m6
+						label(for="category") <span data-i18n="demo.stock_item_form.categoria"></span>
+						select.browser-default.browser-default(name="category", id="category", style="font-family:")
+							if !Stock_item
+								option(value="#{Stock_item[0].category}", selected="selected") #{Stock_item[0].category}
+							else
+								-for(var i = 0; i < categoriias.length; i++)
+									option(value="#{categoriias[i]}") #{categoriias[i]}
+					.col.s12.m6
+						label(for="subcategory") <span data-i18n="demo.stock_item_form.subcategoria"></span>
+						select.browser-default.browser-default(name="subcategory", id="subcategory")
+							if !Stock_item
+								option(value="#{Stock_item[0].category}", select.browser-defaulted="select.browser-defaulted") #{Stock_item[0].subcategory}
+							else
+								-for(var i = 0; i < subcategoriias[0].length; i++)
+									option(value="#{subcategoriias[0][i]}") #{subcategoriias[0][i]}
+				.row
+					.col.s12.m6.input-field
+							label(for="lead_time") <span data-i18n="demo.stock_item_form.tempo_entrega"></span>
+							input.preencher( autocomplete="off", type="number", id="lead_time", min=0 value="#{Stock_item ? Stock_item[0].lead_time:''}", style="font-family:")
+					.col.s12.m6.input-field.hide
+						label(for="list_price") Preco Minimo
+						input.preencher( autocomplete="off", type="number", id="list_price", min=0 value="#{Stock_item ? Stock_item[0].list_price:''}", style="font-family:")
+					.col.s12.m6.input-field.hide
+						label(for="list_date_price") Data do ultimo preco
+						input.preencher( autocomplete="off", type="text", id="list_date_price", name="list_date_price", value="#{Stock_item ? Stock_item[0].list_date_price : ''}", style="font-family:")
+					.col.s12.m6.input-field
+						label(for="part_number") Part Number
+						input.preencher( autocomplete="off", type="text", id="part_number", value="#{Stock_item ? Stock_item[0].part_number:''}", style="font-family:")
+					
+
+
+			fieldset.no-border
+				.row.buttons-container
+					if Stock_item
+						.col.s12.m6.left-button
+							button(type="button", class="btn", id="registar_stock_item_editado") <span data-i18n="demo.utilizador_form.gravar"></span>
+
+						.col.s12.m6.right-button
+							button(type="button", class="btn red", id="voltar_util") <span data-i18n="demo.utilizador_form.cancelar"></span>
+					else
+						.col.s12.center
+							button#voltar_util(type="button", class="btn waves-efect waves-light activarAzul") << Back
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script(type="text/javascript" src="/js/DecoderWorker.js")
+		script(type="text/javascript" src="/js/exif.js")
+		script(type="text/javascript" src="/js/BarcodeReader.js")
+		//- script(type="text/javascript" src="https://unpkg.com/simple-barcode-scanner")
+		script.
+
+			setInterval(function(){document.getElementById("StockId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+

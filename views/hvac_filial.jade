@@ -1,0 +1,52 @@
+extends layout
+block content
+	form
+		fieldset.no-border.legend-border
+			legend.selmecAzul.bold Criacao da Filial
+			.row
+				.input-field.col.s12.m6
+					label(for="nome_cliente") Nome do Cliente
+					input.preencher(autocomplete="off", type="text", idioty="#{Clientes[0]._id}", style="font-family:;color:#12375c" ,id="nome_cliente", readonly, value="#{Clientes[0].nome_cliente}",name="nome_cliente")
+				.input-field.col.s12.m6
+					label(for="nome") Filial
+					input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="nome", name="nome")
+			.row
+				.col.s12.m6
+					label(for="regiao") <span data-i18n="demo.utilizador_form.regiao"></span>
+					select.browser-default(name="regiao", id="regiao", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<AdMagen[0].regiao.length; i++)
+							option(value="#{AdMagen[0].regiao[i].nome}", data-cont="#{AdMagen[0].regiao[i]._id}" ) #{AdMagen[0].regiao[i].nome}
+				.col.s12.m6
+					label <span data-i18n="demo.utilizador_form.provincia"></span>
+					select.browser-default.browser-default(name="provincia", id="provincia", style="font-family:")
+						option(value="" disabled selected) Escolha a opção
+						-for(let i=0; i<AdMagen[0].provincia.length; i++)
+							option(value="#{AdMagen[0].provincia[i].nome}", data-cont="#{AdMagen[0].provincia[i]._id}") #{AdMagen[0].provincia[i].nome}
+			.row
+				.input-field.col.s12.m6
+					label(for="rua") Rua/Avenida
+					input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="rua", name="rua")
+				.input-field.col.s12.m6
+					label(for="numero_cliente") Numero
+					input.preencher(autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="numero_cliente", name="numero_cliente")
+				.input-field.col.s12.m6
+					label(for="bairro") Bairro
+					input.preencher(autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="bairro", name="bairro")
+		fieldset.no-border
+				.row.buttons-container
+					.col.s12.center
+						butoon#criacao_hvac_filiaoks(type="button", class="btn waves-efect waves-light activarAzul", signal="#{Signal}") Criar
+	
+	block js
+		script.
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);

@@ -1,0 +1,260 @@
+extends layout
+block content
+	form#ttnumberform(style="margin-bottom:0px; height:550px" name="ttnumbercalloutform")
+		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.operationssupport"></span>
+		.row#recolherdados(style="margin-top:-40px; margin-bottom:0px" detalhesclientessite="#{SiteCliente}" detalhessiteinfo="#{SiteInfo}" detalhesjobcards="#{DadosJobcards}" detalhesjobcardscallout="#{DadosJobcardCallout}" detalhesclientes="#{DadosClientes}" detalhesdepartamento="#{DadosDepartamento}")
+			.col.s12.m6(style="margin-top:5px")
+				label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+				select.browser-default(name="jobcard_clienteid", id="jobcard_clienteid")
+					option(value="" disabled selected) Escolha a opção
+					-for(var i=0; i<Clientes.length; i++)
+						option(value="#{Clientes[i]._id}") #{Clientes[i].cliente_nome}
+			.input-field.col.s12.m6(style="margin-top:22px")
+				label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+				input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_ttnumber" ,name="jobcard_ttnumber")
+		.row(style="margin-bottom:0px") 
+			.col.s12.m6(style="margin-top:6px")
+				label <span data-i18n="demo.manutencao_form.departamento"></span>
+				select.browser-default(name="jobcard_departamentottnumber", id="jobcard_departamentottnumber")
+					option(value="" disabled selected) Escolha a opção
+			.col.s2.hide-on-med-and-up(style="margin-top:22px")
+				img(class="hide-on-med-and-up" src="/img/okk.png")
+			.input-field.col.s10.m6(style="margin-top:22px")
+				select(name="jobcard_call", id="jobcard_call" multiple)
+					option#terceiro(value="" disabled selected) Escolha a opção
+					option(value="Radio") Radio
+					option(value="Transmission") Transmission
+					option(value="Power") Power
+					option(value="Civil") Civil
+					option(value="Core-data center") Core-data center
+				label Call
+		.row(style="margin-bottom:0px")
+			.col.s10.m6.jobcard_siteidselect(style="margin-top:3px")
+				label(for="jobcard_siteidselectttnumber") Site
+				select.browser-default(name="jobcard_siteidselectttnumber", id="jobcard_siteidselectttnumber")
+					option(value="" disabled selected) Escolha a opção
+			.col.s2.hide-on-med-and-up.jobcard_siteidselect.hide(style="margin-top:22px")
+				img(class="hide-on-med-and-up" src="/img/okk.png")
+			.input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+				label(for="jobcard_siteidinputttnumber") Site
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinputttnumber", name="jobcard_siteidinputttnumber")
+			.col.s12.m6(style="margin-top:2px")
+				label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+				select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+					option(value="" disabled selected) Escolha a opção
+					-for(var i=0; i<Usuarios.length; i++)
+						option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+		.row(style="margin-bottom:0px")
+			.input-field.col.s10.m6.jobcard_jobinfoselect.hide(style="margin-top:22px")
+				select(name="jobcard_jobinfoselect", id="jobcard_jobinfoselect" multiple)
+					option(value="" disabled selected) Escolha a opção
+				label <span data-i18n="demo.manutencao_form.jobinfo"></span>
+			.input-field.col.s12.m6.jobcard_jobinfoinput(style="margin-top:22px")
+				label(for="jobcard_jobinfoinput") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfoinput" ,name="jobcard_jobinfoinput")
+			.col.s12.m6(style="margin-top:6px")
+				label(for="jobcard_priority") <span data-i18n="demo.ttnumber_form.prioridade"></span>
+				select.browser-default(name="jobcard_priority", id="jobcard_priority")
+					option(value="" disabled selected) Escolha a opção
+					option(value="Alta") Alta
+					option(value="Media") Média
+					option(value="Baixa") Baixa
+		.row(style="margin-bottom:0px")
+			.input-field.col.s12.m6(style="margin-top:7px")
+				label(for="jobcard_reportnmcoperator") <span data-i18n="demo.manutencao_form.reportnmcoperator"></span>
+				input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_reportnmcoperator" ,name="jobcard_reportnmcoperator")
+			.input-field.col.s12.m6(style="margin-top:6px")
+				label(for="jobcard_datareporte") <span data-i18n="demo.manutencao_form.datareporte"></span>
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_datareporte" ,name="jobcard_datareporte", value = "#{DataRelatada}", readonly)
+		.row(style="margin-bottom:0px")
+			.input-field.col.s12.m6(style="margin-top:6px")
+				label(for="jobcard_horareporte") <span data-i18n="demo.manutencao_form.horareporte"></span>
+				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_horareporte" ,name="jobcard_horareporte", value = "#{HoraRelatada}", readonly)
+		button(type="button", id="createnewttnumber", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+	block js
+		script(type="text/javascript" src="/js/jquery.mask.js")
+		script.
+
+			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+			setTimeout(function(){
+				
+			if(window.innerWidth<780){
+			document.getElementById("mySidebar").style.width = "0";
+			document.getElementById("main").style.marginLeft= "0";
+			document.getElementById("main").style.width="100%";
+			document.getElementById("main").style.marginBottom="0";
+			document.getElementByClassName("capitalize").style.class="pequeno";
+			}
+			}, 50);
+
+
+//- extends layout
+//- block content
+//- 	form#ttnumberform(style="margin-bottom:0px; height:550px" name="ttnumbercalloutform")
+//- 		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.operationssupport"></span>
+//- 		.row#recolherdados(style="margin-top:-40px; margin-bottom:0px" detalhesclientessite="#{SiteCliente}" detalhessiteinfo="#{SiteInfo}" detalhesjobcards="#{DadosJobcards}" detalhesjobcardscallout="#{DadosJobcardCallout}" detalhesclientes="#{DadosClientes}" detalhesdepartamento="#{DadosDepartamento}")
+//- 			.col.s12.m6(style="margin-top:5px")
+//- 				label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+//- 				select.browser-default(name="jobcard_clienteid", id="jobcard_clienteid")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 					-for(var i=0; i<Clientes.length; i++)
+//- 						option(value="#{Clientes[i]._id}") #{Clientes[i].cliente_nome}
+//- 			.input-field.col.s12.m6(style="margin-top:22px")
+//- 				label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+//- 				input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_ttnumber" ,name="jobcard_ttnumber")
+//- 		.row(style="margin-bottom:0px")
+//- 			.col.s12.m6(style="margin-top:6px")
+//- 				label <span data-i18n="demo.manutencao_form.departamento"></span>
+//- 				select.browser-default(name="jobcard_departamentottnumber", id="jobcard_departamentottnumber")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 			.col.s2.hide-on-med-and-up(style="margin-top:22px")
+//- 				img(class="hide-on-med-and-up" src="/img/okk.png")
+//- 			.input-field.col.s10.m6(style="margin-top:22px")
+//- 				select(name="jobcard_call", id="jobcard_call" multiple)
+//- 					option#terceiro(value="" disabled selected) Escolha a opção
+//- 					option(value="Radio") Radio
+//- 					option(value="Transmission") Transmission
+//- 					option(value="Power") Power
+//- 					option(value="Civil") Civil
+//- 					option(value="Core-data center") Core-data center
+//- 				label Call
+//- 		.row(style="margin-bottom:18px")
+//- 			.col.s10.m6.jobcard_siteidselect(style="margin-top:3px")
+//- 				label(for="jobcard_siteidselectttnumber") Site
+//- 				select.browser-default(name="jobcard_siteidselectttnumber", id="jobcard_siteidselectttnumber")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 			.col.s2.hide-on-med-and-up.jobcard_siteidselect.hide(style="margin-top:22px")
+//- 				img(class="hide-on-med-and-up" src="/img/okk.png")
+//- 			.input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+//- 				label(for="jobcard_siteidinputttnumber") Site
+//- 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinputttnumber", name="jobcard_siteidinputttnumber")
+//- 			.col.s12.m6(style="margin-top:2px")
+//- 				label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+//- 				select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 					-for(var i=0; i<Usuarios.length; i++)
+//- 						option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+//- 		.row(style="margin-bottom:0px")
+//- 			.input-field.col.s10.m6.jobcard_jobinfoselect.hide(style="margin-top:3px")
+//- 				select(name="jobcard_jobinfoselect", id="jobcard_jobinfoselect" multiple)
+//- 					option(value="" disabled selected) Escolha a opção
+//- 				label <span data-i18n="demo.manutencao_form.jobinfo"></span>
+//- 			.col.s2.hide-on-med-and-up.jobcard_jobinfoselect(style="margin-top:3px")
+//- 				img(class="hide-on-med-and-up" src="/img/okk.png")
+//- 			.input-field.col.s12.m6.jobcard_jobinfoinput(style="margin-top:2px")
+//- 				label(for="jobcard_jobinfoinput") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+//- 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfoinput" ,name="jobcard_jobinfoinput")
+//- 			.input-field.col.s12.m6(style="margin-top:2px")
+//- 				label(for="jobcard_reportnmcoperator") <span data-i18n="demo.manutencao_form.reportnmcoperator"></span>
+//- 				input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_reportnmcoperator" ,name="jobcard_reportnmcoperator")
+//- 		.row(style="margin-bottom:0px")
+//- 			.input-field.col.s12.m6(style="margin-top:6px")
+//- 				label(for="jobcard_datareporte") <span data-i18n="demo.manutencao_form.datareporte"></span>
+//- 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_datareporte" ,name="jobcard_datareporte", value ="#{DataRelatada}", readonly)
+//- 			.input-field.col.s12.m6(style="margin-top:6px")
+//- 				label(for="jobcard_horareporte") <span data-i18n="demo.manutencao_form.horareporte"></span>
+//- 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_horareporte" ,name="jobcard_horareporte", value = "#{HoraRelatada}", readonly)
+//- 		button(type="button", id="createnewttnumber", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+//- 	block js
+//- 		script(type="text/javascript" src="/js/jquery.mask.js")
+//- 		script.
+
+//- 			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+//- 			setTimeout(function(){
+				
+//- 			if(window.innerWidth<600){
+//- 			document.getElementById("mySidebar").style.width = "0";
+//- 			document.getElementById("main").style.marginLeft= "0";
+//- 			document.getElementById("main").style.width="100%";
+//- 			document.getElementById("main").style.marginBottom="0";
+//- 			document.getElementByClassName("capitalize").style.class="pequeno";
+//- 			}
+//- 			}, 50);
+
+
+
+
+
+
+//- extends layout
+//- block content
+//- 	form#ttnumberform(style="margin-bottom:0px; height:550px" name="ttnumbercalloutform")
+//- 		h3(class="fs-title selmecAzul" style="margin-top:20px; margin-bottom:54px; border-bottom: 5px solid #a1c861 !important;") <span data-i18n="demo.ttnumber_form.workreporte"></span>
+//- 		.row#recolherdados(style="margin-top:-40px; margin-bottom:0px" detalhesclientessite="#{SiteCliente}" detalhessiteinfo="#{SiteInfo}" detalhesjobcards="#{DadosJobcards}" detalhesjobcardscallout="#{DadosJobcardCallout}" detalhesclientes="#{DadosClientes}" detalhesdepartamento="#{DadosDepartamento}")
+//- 			.input-field.col.s12.m6(style="margin-top:22px")
+//- 				label(for="jobcard_ttnumber") <span data-i18n="demo.ttnumber_form.ttnumber"></span>
+//- 				input( autocomplete="off", type="number", style="font-family:;color:#12375c" ,id="jobcard_ttnumber" ,name="jobcard_ttnumber")
+//- 			.col.s12.m6(style="margin-top:5px")
+//- 				label(for="jobcard_clienteid") <span data-i18n="demo.ttnumber_form.cliente"></span>
+//- 				select.browser-default(name="jobcard_clienteid", id="jobcard_clienteid")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 					-for(var i=0; i<Clientes.length; i++)
+//- 						option(value="#{Clientes[i]._id}") #{Clientes[i].cliente_nome}
+//- 		.row(style="margin-bottom:0px")
+//- 			.input-field.col.s10.m6(style="margin-top:22px")
+//- 				select(name="jobcard_call", id="jobcard_call" multiple)
+//- 					option#terceiro(value="" disabled selected) Escolha a opção
+//- 					option(value="Radio") Radio
+//- 					option(value="Transmission") Transmission
+//- 					option(value="Power") Power
+//- 					option(value="Civil") Civil
+//- 					option(value="Core-data center") Core-data center
+//- 				label Call
+//- 			.col.s2.hide-on-med-and-up(style="margin-top:22px")
+//- 				img(class="hide-on-med-and-up" src="/img/okk.png")
+//- 			.col.s12.m6(style="margin-top:6px")
+//- 				label <span data-i18n="demo.manutencao_form.departamento"></span>
+//- 				select.browser-default(name="jobcard_departamentottnumber", id="jobcard_departamentottnumber")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 		.row(style="margin-bottom:18px")
+//- 			.col.s10.m6.jobcard_siteidselect(style="margin-top:3px")
+//- 				label(for="jobcard_siteidselectttnumber") Site
+//- 				select.browser-default(name="jobcard_siteidselectttnumber", id="jobcard_siteidselectttnumber")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 			.col.s2.hide-on-med-and-up.jobcard_siteidselect.hide(style="margin-top:22px")
+//- 				img(class="hide-on-med-and-up" src="/img/okk.png")
+//- 			.input-field.col.s12.m6.jobcard_siteidinput.hide(style="margin-top:19px")
+//- 				label(for="jobcard_siteidinputttnumber") Site
+//- 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_siteidinputttnumber", name="jobcard_siteidinputttnumber")
+//- 			.col.s12.m6(style="margin-top:2px")
+//- 				label(for="jobcard_tecnicoid") <span data-i18n="demo.ttnumber_form.tecniconome"></span>
+//- 				select.browser-default(name="jobcard_tecnicoid", id="jobcard_tecnicoid")
+//- 					option(value="" disabled selected) Escolha a opção
+//- 					-for(var i=0; i<Usuarios.length; i++)
+//- 						option(value="#{Usuarios[i]._id}") #{Usuarios[i].nome}
+//- 		.row(style="margin-bottom:0px")
+//- 			.input-field.col.s10.m6.jobcard_jobinfoselect.hide(style="margin-top:3px")
+//- 				select(name="jobcard_jobinfoselect", id="jobcard_jobinfoselect" multiple)
+//- 					option(value="" disabled selected) Escolha a opção
+//- 				label <span data-i18n="demo.manutencao_form.jobinfo"></span>
+//- 			.col.s2.hide-on-med-and-up.jobcard_jobinfoselect(style="margin-top:3px")
+//- 				img(class="hide-on-med-and-up" src="/img/okk.png")
+//- 			.input-field.col.s12.m6.jobcard_jobinfoinput(style="margin-top:2px")
+//- 				label(for="jobcard_jobinfoinput") <span data-i18n="demo.manutencao_form.jobinfo"></span>
+//- 				input( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_jobinfoinput" ,name="jobcard_jobinfoinput")
+//- 			.input-field.col.s12.m6(style="margin-top:2px")
+//- 				label(for="jobcard_reportnmcoperator") <span data-i18n="demo.manutencao_form.reportnmcoperator"></span>
+//- 				input( autocomplete="on", type="text", style="font-family:;color:#12375c" ,id="jobcard_reportnmcoperator" ,name="jobcard_reportnmcoperator")
+//- 		.row(style="margin-bottom:0px")
+//- 			.input-field.col.s12.m6(style="margin-top:6px")
+//- 				label(for="jobcard_datareporte") <span data-i18n="demo.manutencao_form.datareporte"></span>
+//- 				input.datepicker( autocomplete="off", type="text", style="font-family:;color:#12375c" ,id="jobcard_datareporte" ,name="jobcard_datareporte")
+//- 			.input-field.col.s12.m6(style="margin-top:6px")
+//- 				label(for="jobcard_horareporte") <span data-i18n="demo.manutencao_form.horareporte"></span>
+//- 				input( autocomplete="off", type="text", data-mask="00:00", style="font-family:;color:#12375c" ,id="jobcard_horareporte" ,name="jobcard_horareporte")
+//- 		button(type="button", id="createnewttnumber", class="btn modal-action waves-effect waves-green btn-flat" style="margin-top: 15px !important; font-size:12px") <span data-i18n="demo.ttnumber_form.create"></span>
+//- 	block js
+//- 		script(type="text/javascript" src="/js/jquery.mask.js")
+//- 		script.
+
+//- 			setTimeout(function(){document.getElementById("geradorId").className="activarAzul"}, 50);
+//- 			setTimeout(function(){
+				
+//- 			if(window.innerWidth<600){
+//- 			document.getElementById("mySidebar").style.width = "0";
+//- 			document.getElementById("main").style.marginLeft= "0";
+//- 			document.getElementById("main").style.width="100%";
+//- 			document.getElementById("main").style.marginBottom="0";
+//- 			document.getElementByClassName("capitalize").style.class="pequeno";
+//- 			}
+//- 			}, 50);

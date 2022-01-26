@@ -125,6 +125,8 @@ router.post("/novo", upload.any(), function(req, res){
 
 router.post("/atribuicao", upload.any(), async  function(req, res){
 
+	console.log("teste");
+
 
 	// console.log(req.body)
 	// historico.gravarDadosHistorico(req.body, function(err){

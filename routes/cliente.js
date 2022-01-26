@@ -69,7 +69,7 @@ router.post('/upload', function(req, res) {
                     input: req.file.path,
                     output: null, //since we don't need output.json
                     lowerCaseHeaders:true
-                }, function(err,result){
+                }, function(err, result){
                     if(err) {
                         return res.json({error_code:1,err_desc:err, data: null});
                     }

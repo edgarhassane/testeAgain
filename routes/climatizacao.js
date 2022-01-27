@@ -15,6 +15,7 @@ var model = require('../entities/usuario');
 var NodeGeocoder=require("node-geocoder");
 var fs = require("fs");
 
+
 const options = {
   provider: 'google',
  

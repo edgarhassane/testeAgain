@@ -192,6 +192,7 @@ router.get("/detalhes/:id", function(req, res){
 oficina.find({_id:req.params.id}, function(err, data){
 	if(err){
 		console.log("ocorreu um erro ao tentar aceder os dados")
+		console.log("")
 	}
 	else
 		// console.log(data)

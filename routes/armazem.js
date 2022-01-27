@@ -26,8 +26,6 @@ var upload = multer({
 
 router.get("/", function(req, res){
 
-	
-	
 	var userData= req.session.usuario;
 
 	if(userData.nivel_acesso=="admin" || userData.nome=="Henk Brutten"|| userData.nome=="Manager" || userData.nome=="Hamilton Sitoe")

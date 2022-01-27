@@ -156,4 +156,7 @@ hvacSchema.statics.gravar_hvac=function(armaz, callback){
 // teste de github
 
 
+// tetssysys
+
+
 module.exports=mongoose.model("Climatizacao", hvacSchema, "Climatizacao");

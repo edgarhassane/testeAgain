@@ -7,9 +7,9 @@ var cliente_schema=new mongoose.Schema({
 	provincia_ref:String,
 	regiao:String,
 	regiao_ref:String,
+	teste:String,
 	numero_cliente:String,
 	rua:String,
-
 	nuit:String,
 	criado_por:String,
 	data_criacao:{

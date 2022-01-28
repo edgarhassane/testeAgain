@@ -26,6 +26,7 @@ var hvacSchema=new mongoose.Schema({
 		type:Date,
 		"default":Date.now
 	},
+	// teste do git
 	data_ultimaactualizacaojobcard:{
 		type:Date,
 		"default":Date.now
@@ -154,6 +155,7 @@ hvacSchema.statics.gravar_hvac=function(armaz, callback){
 }
 
 // teste de github
+// outras information
 
 
 // tetssysys

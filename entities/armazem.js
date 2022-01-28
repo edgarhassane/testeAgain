@@ -14,6 +14,8 @@ var armazemSchema=new mongoose.Schema({
 
 })
 
+// teste do github
+
 armazemSchema.statics.gravar_armazem=function(armaz, callback){
 	this.create(armaz, callback)
 }

@@ -11,6 +11,8 @@ var messageSchema= new mongoose.Schema({
 	 })
 messageSchema.statics.gravarDados=function(msg, callback){
 	this.create(msg, callback);
+
+	
 }
 
 module.exports= mongoose.model("Mensagem", messageSchema, "Mensagem");

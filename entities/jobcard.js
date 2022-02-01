@@ -26,6 +26,8 @@ var jobcardSchema=new mongoose.Schema({
 	jobcard_reportnmcoperator:String,
 	jobcard_jobinfo:[String],
 	jobcard_tecniconome:String,
+
+	
 	jobcard_tecnicoid:String,
 	jobcard_cell:String,
 	jobcard_linemanager:String,

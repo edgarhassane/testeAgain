@@ -10,10 +10,8 @@ var armazemSchema=new mongoose.Schema({
 	provincia:String,
 	regiao:String, 
 	item_returned:[{description_item:String, disponivel:Number, defeituosa:Number, referencia:String, serialized:String, cliente_name:String, part_number:String, serial_number:[String], data_received:[String], pod:[String], category:String, precos:[String]}]
-	
 
 })
-
 
 armazemSchema.statics.gravar_armazem=function(armaz, callback){
 	this.create(armaz, callback)

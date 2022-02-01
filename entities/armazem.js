@@ -28,3 +28,5 @@ armazemSchema.statics.gravar_armazem=function(armaz, callback){
 }
 
 module.exports=mongoose.model("Armazem", armazemSchema, "Armazem");
+
+// ola do pc do manager

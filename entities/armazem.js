@@ -13,6 +13,9 @@ var armazemSchema=new mongoose.Schema({
 
 })
 
+
+// feito desse lado camarada
+
 armazemSchema.statics.gravar_armazem=function(armaz, callback){
 	this.create(armaz, callback)
 }

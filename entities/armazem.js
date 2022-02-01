@@ -14,7 +14,7 @@ var armazemSchema=new mongoose.Schema({
 
 })
 
-// opha nao se percebe dis
+// opha nao se percebe dis   gsgsgs
 
 
 armazemSchema.statics.gravar_armazem=function(armaz, callback){

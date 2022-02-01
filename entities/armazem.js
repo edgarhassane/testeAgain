@@ -13,14 +13,7 @@ var armazemSchema=new mongoose.Schema({
 
 })
 
-<<<<<<< HEAD
-=======
 
-// opha nao se percebe dis   gsgsgs
-
-
-
->>>>>>> Mestre
 armazemSchema.statics.gravar_armazem=function(armaz, callback){
 	this.create(armaz, callback)
 

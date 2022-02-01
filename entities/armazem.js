@@ -17,10 +17,12 @@ var armazemSchema=new mongoose.Schema({
 })
 
 
-// feito desse lado camarada
+// feito desse lado camarad
 
 armazemSchema.statics.gravar_armazem=function(armaz, callback){
 	this.create(armaz, callback)
+
+	
 }
 
 module.exports=mongoose.model("Armazem", armazemSchema, "Armazem");

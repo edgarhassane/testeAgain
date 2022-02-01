@@ -27,7 +27,7 @@ var hvacSchema=new mongoose.Schema({
 		"default":Date.now
 	},
 
-	// teste do git testeuu
+	// aumentando o merge
 
 	data_ultimaactualizacaojobcard:{
 		type:Date,
@@ -61,7 +61,7 @@ var hvacSchema=new mongoose.Schema({
 	origem:{latitude:String,
 	longitude:String},
 
-	//Campos Padrão
+	
     data_registojobcardms:Number,
     datareporte:String,
 	horareporte:String,

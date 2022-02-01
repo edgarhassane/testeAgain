@@ -16,7 +16,6 @@ var armazemSchema=new mongoose.Schema({
 
 })
 
-// feito desse lado camarad do
 
 
 
